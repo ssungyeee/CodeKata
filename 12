@@ -1,0 +1,15 @@
+public class Solution 
+{
+    public double solution(int[] arr) 
+    {
+        int i = 0;
+        double answer = 0;
+
+        while (i < arr.Length)
+        {
+            answer += arr[i];
+            i++;                                        
+        }
+        return answer / arr.Length;
+    }
+}
