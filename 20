@@ -1,0 +1,44 @@
+using System;
+
+public class Solution 
+{
+    public long solution(long n) 
+    {
+        long answer = 0;
+        long k = (long)(Math.Log10(n) + 1);
+        long[] ary = new long[k];
+        
+        long i = 0;
+        
+        while (n != 0)
+        {
+            ary[i] = n % 10;
+            i++;
+            n = n / 10;
+        }
+        
+        long num;
+        
+        for(long j = 0; j < ary.Length; j++)
+        {
+            for (long h = j + 1; h < ary.Length; h++)
+            {
+                if (ary[h] < ary[j])
+                {
+                    num = ary[j];
+                    ary[j] = ary[h];
+                    ary[h] = num;
+                }
+            }
+        }
+        
+        long x = 1;
+        
+        for (long j = 0; j < ary.Length; j++)
+        {
+            answer += ary[j] * x;
+            x = x * 10;
+        }        
+        return answer;
+    }
+}
