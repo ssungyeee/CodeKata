@@ -1,0 +1,24 @@
+public class Solution 
+{
+    public bool solution(int x) 
+    {
+        int i = 0;
+        int j = x;
+        bool answer = true;
+        
+        while(j != 0)
+        {
+            i += j % 10;
+            j = j / 10;
+        }
+        if (x % i == 0 )
+        {
+            answer = true;
+        }
+        else
+        {
+            answer = false;
+        }
+        return answer;
+    }
+}
