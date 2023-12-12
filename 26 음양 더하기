@@ -1,0 +1,28 @@
+using System;
+
+public class Solution 
+{
+    public int solution(int[] absolutes, bool[] signs) 
+    {
+        int[] arr = new int[absolutes.Length];
+        
+        for (int i = 0; i < absolutes.Length; i++) 
+        {
+            if (signs[i])
+            {
+                 arr[i] = absolutes[i] * 1;
+            }
+            else
+            {
+                arr[i] = absolutes[i] * -1;
+            }
+        }
+        int answer = 0;
+        
+        for (int j = 0; j < arr.Length; j++)
+        {
+            answer += arr[j];
+        }
+        return answer;
+    }
+}
