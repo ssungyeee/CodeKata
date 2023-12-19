@@ -1,0 +1,40 @@
+public class Solution 
+{
+    public int[] solution(int[] arr) 
+    {
+        int arrLength = arr.Length - 1;
+        int num = 0;
+        if (arr.Length == 1)
+        {
+            arrLength = 1;
+        }
+        int[] arr2 = new int[arr.Length];
+        int[] answer = new int[arrLength];
+        
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr.Length != 1)
+            {
+                for (int j = 0; j < arr.Length; j++)
+                {                
+                    if (arr[i] > arr[j])
+                    {
+                        arr2[num] = arr[i];
+                        num++;
+                        break;
+                    }
+                }                
+            }
+            else if (arr.Length == 1)
+            {
+                arr2[i] = -1;
+            }            
+        }
+        
+        for (int k = 0; k < arrLength; k++)
+        {
+            answer[k] = arr2[k];
+        }
+        return answer;
+    }
+}
