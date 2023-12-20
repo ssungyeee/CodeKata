@@ -1,0 +1,21 @@
+public class Solution 
+{
+    public string solution(string s) 
+    {
+        char[] chars = s.ToCharArray();
+        string answer = "";
+        
+        if (chars.Length % 2 == 0) // 문자열 길이가 짝수
+        {
+            int i = (chars.Length / 2) - 1;
+            answer += chars[i];
+            answer += chars[i+1];
+        }
+        else // 문자열 길이가 홀수
+        {
+            int i = chars.Length / 2;
+            answer += chars[i];
+        }
+        return answer;
+    }
+}
