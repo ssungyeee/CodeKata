@@ -1,0 +1,26 @@
+public class Solution
+{
+    public string solution(int n)
+    {
+        string answer = "";
+        char[] chars = new char[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            if (i % 2 == 0)
+            {
+                chars[i] = '수';
+            }
+            else
+            {
+                chars[i] = '박';
+            }
+        }
+
+        for (int j = 0; j < chars.Length; j++)
+        {
+            answer += chars[j];
+        }                
+        return answer;
+    }
+}
