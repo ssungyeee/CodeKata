@@ -1,0 +1,34 @@
+using System;
+
+public class Solution
+{
+    public int solution(int left, int right)
+    {
+        int answer = 0;
+        int num = 0;
+
+        while (left <= right)
+        {
+            for (int i = 1; i <= left; i++)
+            {
+                if (left % i == 0)
+                {
+                    num++;
+                }
+            }
+
+            if (num % 2 == 0) 
+            {
+                answer += left;
+            }
+            else
+            {
+                answer -= left;
+            }
+            num = 0;
+            left++;
+        }
+        Console.WriteLine(answer);
+        return answer;
+    }
+}
