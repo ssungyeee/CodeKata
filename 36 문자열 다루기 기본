@@ -1,0 +1,25 @@
+public class Solution
+{
+    public bool solution(string s)
+    {
+        bool answer;
+        int num;
+
+        if (s.Length == 4 || s.Length == 6)
+        {
+            if (int.TryParse(s, out num))
+            {
+                answer = true;
+            }
+            else
+            {
+                answer = false;
+            }
+        }
+        else
+        {
+            answer = false;
+        }
+        return answer;
+    }
+}
