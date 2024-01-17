@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+{
+    public int solution(int n)
+    {
+        int answer = 0;
+        int j = 1;
+        int k = n;
+
+        List<int> list = new List<int>();
+
+        if (n / 3 == 0)
+        {
+            list.Add(n);
+        }
+        else
+        {
+            for (int i = 0; k > 0; i++)
+            {
+                list.Add(k % 3);
+                k = k / 3;
+            }
+     
+        }
+
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            list[i] = list[i] * j;
+            j = j * 3;
+            answer += list[i];
+        }
+
+        Console.WriteLine(answer);
+
+        return answer;
+    }
+}
