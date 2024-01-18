@@ -1,0 +1,35 @@
+using System.Collections.Generic;
+
+public class Solution
+{
+    public string solution(string s)
+    {
+        string answer = "";
+
+
+        List<string> list = new List<string>(s.Split( ));
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            char[] chars = list[i].ToCharArray();
+            for (int j = 0; j < chars.Length; j++)
+            {
+                if (j % 2 == 0)
+                {
+                    answer += chars[j].ToString().ToUpper();
+                }
+                else
+                {
+                    answer += chars[j].ToString().ToLower();
+                }
+            }
+            if (i == list.Count - 1)
+            {
+                break;
+            }
+            answer += " ";
+        }
+
+        return answer;
+    }
+} 
