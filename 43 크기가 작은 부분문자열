@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(string t, string p)
+    {
+        int answer = 0;
+        string str = "";
+
+        char[] chars1 = t.ToCharArray();
+
+        List<string> strings1 = new List<string>();
+        List<long> numbers1 = new List<long>();
+
+        for (int i = 0; i < chars1.Length - (p.Length - 1); i++)
+        {
+            str += chars1[i];
+            for (int j = 1; j < p.Length; j++)
+            {
+                str += chars1[i + j];
+            }
+            strings1.Add(str);
+            str = "";
+            numbers1.Add(long.Parse(strings1[i]));
+        }
+
+        long nump = long.Parse(p);
+
+        for (int i = 0; i < numbers1.Count; i++)
+        {
+            if (numbers1[i] <= nump)
+            {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
