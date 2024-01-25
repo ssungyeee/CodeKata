@@ -1,0 +1,37 @@
+public class Solution
+{
+    public string solution(string s, int n)
+    {
+        string answer = "";
+        char[] chars = s.ToCharArray();
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            int num = chars[i];
+            if (num >= 97 && num <= 122)
+            {
+                if (num + n > 122)
+                {
+                    chars[i] = (char)(96 + ((num + n) - 122));
+                }
+                else
+                {
+                    chars[i] = (char)(num + n);
+                }
+            }
+            else if (num >= 65 && num <= 90)
+            {
+                if (num + n > 90)
+                {
+                    chars[i] = (char)(64 + ((num + n) - 90));
+                }
+                else
+                {
+                    chars[i] = (char)(num + n);
+                }
+            }
+            answer += chars[i];
+        }
+        return answer;
+    }
+}
