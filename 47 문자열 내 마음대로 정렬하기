@@ -1,0 +1,29 @@
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+public class Solution
+{
+    public string[] solution(string[] strings, int n)
+    {
+        List<string> list = new List<string>();
+        Array.Sort(strings);
+
+        IEnumerable<string> query = from word in strings
+                                    orderby word.Substring(n, 1)
+                                    select word;
+        foreach (string str in query)
+        {
+            list.Add(str);
+        }
+
+        string[] answer = new string[list.Count];
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            answer[i] = list[i];
+        }
+
+        return answer;
+    }
+}
