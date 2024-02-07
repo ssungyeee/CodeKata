@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int[] solution(int[] array, int[,] commands)
+    {
+        int commandsLength = commands.GetLength(0);
+        int[] answer = new int[commandsLength];
+        List<int> list = new List<int>();
+
+        for (int j = 0; j < commandsLength; j++)
+        {
+            for (int i = commands[j, 0] - 1; i < commands[j, 1]; i++)
+            {
+                list.Add(array[i]);
+            }
+            list.Sort();
+            answer[j] = list[commands[j, 2] - 1];
+            list.Clear();
+        }
+
+        return answer;
+    }
+}
