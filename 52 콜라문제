@@ -1,0 +1,28 @@
+using System;
+
+public class Solution
+{
+    public int solution(int a, int b, int n)
+    {
+        int answer = 0;
+        int num = n;
+        int returnBottle = 0;
+
+        while (num >= a)
+        {
+            for (int i = 0; num > 0; i++)
+            {
+                if (num < a) break;
+                
+                num -= a;
+                returnBottle += b;
+            }
+
+            num += returnBottle;
+            answer += returnBottle;
+            returnBottle = 0;
+        }
+
+        return answer;
+    }
+}
