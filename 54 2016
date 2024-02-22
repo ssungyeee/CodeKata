@@ -1,0 +1,20 @@
+public class Solution
+{
+    public string solution(int a, int b)
+    {
+        int deltaDay = 0;
+
+        int[] month = new int[] { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        string[] day = new string[] { "FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU" };
+
+        for (int i = 0; i < a - 1; i++)
+        {
+            deltaDay += month[i];
+        }
+
+        deltaDay += b - 1;
+        deltaDay %= 7;
+
+        return day[deltaDay];
+    }
+}
