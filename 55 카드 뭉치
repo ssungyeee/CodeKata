@@ -1,0 +1,45 @@
+using System;
+
+public class Solution
+{
+    public string solution(string[] cards1, string[] cards2, string[] goal)
+    {
+        bool rtn = true;
+
+        for (int i = 0; i < goal.Length; i++)
+        {
+            if (goal[i] == cards1[0])
+            {
+                // 조건을 만족 시 배열을 정렬하고 break
+                ArrySort(cards1);
+            }
+            else if (goal[i] == cards2[0])
+            {
+                ArrySort(cards2);
+            }
+            else
+            {
+                // 두 조건을 만족하지 않을 시 rtn == false
+                rtn = false;
+                break;
+            }
+        }
+
+        string answer = rtn ? "Yes" : "No";
+        return answer;
+    }
+
+    public string[] ArrySort(string[] card)
+    {
+        string str = card[0];
+
+        for (int i = 0; i < card.Length - 1; i++)
+        {
+            card[i] = card[i + 1];
+        }
+
+        card[card.Length - 1] = str;
+
+        return card;
+    }
+}
