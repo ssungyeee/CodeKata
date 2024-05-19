@@ -1,0 +1,42 @@
+using System;
+
+public class Solution
+{
+    public int solution(int number, int limit, int power)
+    {
+        int answer = 0;
+        int[] knights = new int[number];
+
+        for (int i = 1; i <= number; i++)
+        {
+            int temp = 0;
+
+            for (int j = 1; j * j <= i; j++)
+            {
+                if (j * j == i)
+                {
+                    temp++;
+                }
+                else if (i % j == 0)
+                {
+                    temp += 2;
+                }
+            }
+
+            knights[i - 1] = temp;
+
+            if (knights[i - 1] > limit)
+            {
+                // power을 answer에 더해준다.
+                answer += power;
+            }
+            else
+            {
+                // knights의 값을 그대로 answer에 더해준다.
+                answer += knights[i - 1];
+            }
+        }
+
+        return answer;
+    }
+}
