@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(string s)
+    {
+        int answer = 0;
+
+        char[] chars = s.ToCharArray();
+        List<string> list = new List<string>();
+
+        // chars 배열을 0번부터 검사.
+        // string 변수에 chars 배열의 데이터를 += 해주면서 반복문 진행
+        // 첫 번째 문자와 같으면 x++, 다르면 y++
+        // x == y가 되면 string 변수를 List에 저장
+        // 저장이 되면 다음 인덱스 데이터를 기준으로 검사 시작.
+
+        int same = 0;
+        int different = 0;
+        string sum = "";
+        int num = 0;
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            if (chars[num] == chars[i])
+            {
+                sum += chars[i];
+                same++;
+            }
+            else
+            {
+                sum += chars[i];
+                different++;
+            }
+
+            if (same == different)
+            {
+                list.Add(sum);
+                num = i + 1;
+                sum = "";
+            }
+        }
+
+        if (same != different)
+        {
+            list.Add(sum);
+        }
+
+        answer += list.Count;
+
+        return answer;
+    }
+}
