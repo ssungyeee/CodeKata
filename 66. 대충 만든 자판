@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+{
+    public int[] solution(string[] keymap, string[] targets)
+    {
+        List<int> answer = new List<int>();
+
+        for (int i = 0; i < targets.Length; i++)
+        {
+            char[] chars = targets[i].ToCharArray();
+            int indexAdd = 0;
+
+            for (int j = 0; j < chars.Length; j++)
+            {
+                List<int> indexes = new List<int>();
+
+                for (int k = 0; k < keymap.Length; k++)
+                {
+                    bool cont = keymap[k].Contains(chars[j]);
+
+                    if (cont)
+                    {
+                        int index = keymap[k].IndexOf(chars[j]);
+                        indexes.Add(index + 1);
+                    }
+                }
+
+                if (indexes.Count == 0)
+                {
+                    indexAdd = -1;
+                    break;
+                }
+
+                indexAdd += indexes.Min();
+            }
+
+            answer.Add(indexAdd);
+        }
+
+        return answer.ToArray();
+    }
+}
