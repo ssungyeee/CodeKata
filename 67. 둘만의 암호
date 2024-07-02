@@ -1,0 +1,42 @@
+using System;
+
+public class Solution
+{
+    public string solution(string s, string skip, int index)
+    {
+        string answer = "";
+        // 'a' == 97
+        // 'z' == 122
+        // int temp = (int)chars[0] + 1;
+
+        char[] chars = s.ToCharArray();
+
+        for (int i = 0; i < chars.Length; i++)
+        {
+            int indexCopy = index;
+
+            for (int j = 0; j < indexCopy; j++)
+            {
+                chars[i]++;
+
+                if (chars[i] > 122)
+                {
+                    int num = (int)chars[i] - 26;
+                    chars[i] = (char)num;
+                }
+
+                if (skip.Contains(chars[i]))
+                {
+                    indexCopy++;
+                }
+            }
+        }
+
+        foreach (var cha in chars)
+        {
+            answer += cha;
+        }
+
+        return answer;
+    }
+}
