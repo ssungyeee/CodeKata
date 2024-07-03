@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(int[] ingredient)
+    {
+        int answer = 0;
+
+        // 1 = 빵
+        // 2 = 야채
+        // 3 = 고기
+        // 1, 2, 3, 1
+
+        List<int> list = new List<int>();
+
+        foreach (int i in ingredient)
+        {
+            list.Add(i);
+
+            if (list.Count > 3)
+            {
+                if (list[list.Count - 4] == 1 && list[list.Count - 3] == 2 && list[list.Count - 2] == 3 && list[list.Count - 1] == 1)
+                {
+                    answer++;
+                    list.RemoveRange(list.Count - 4, 4);
+                }
+            }
+        }
+
+        return answer;
+    }
+}
