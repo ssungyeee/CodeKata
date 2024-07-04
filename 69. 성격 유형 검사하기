@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public string solution(string[] survey, int[] choices)
+    {
+        string answer = "";
+
+        Dictionary<char, int> dict = new Dictionary<char, int>();
+        dict.Add('R', 0);
+        dict.Add('T', 0);
+        dict.Add('C', 0);
+        dict.Add('F', 0);
+        dict.Add('J', 0);
+        dict.Add('M', 0);
+        dict.Add('A', 0);
+        dict.Add('N', 0);
+
+        // choices의 숫자가 7개로 정해져 있으니 switch문??
+
+        for (int i = 0; i < survey.Length; i++)
+        {
+            char[] chars = survey[i].ToCharArray();
+
+            switch (choices[i])
+            {
+                case 1:
+                    dict[chars[0]] += 3;
+                    break;
+                case 2:
+                    dict[chars[0]] += 2;
+                    break;
+                case 3:
+                    dict[chars[0]] += 1;
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    dict[chars[1]] += 1;
+                    break;
+                case 6:
+                    dict[chars[1]] += 2;
+                    break;
+                case 7:
+                    dict[chars[1]] += 3;
+                    break;
+            }
+        }
+
+        answer += Check(dict, 'R', 'T');
+        answer += Check(dict, 'C', 'F');
+        answer += Check(dict, 'J', 'M');
+        answer += Check(dict, 'A', 'N');
+
+        return answer;
+    }
+
+    public char Check(Dictionary<char, int> dict, char char1, char char2)
+    {
+        char str;
+        if (dict[char1] > dict[char2])
+        {
+            str = char1;
+        }
+        else if (dict[char1] == dict[char2])
+        {
+            if (char1 > char2)
+            {
+                str = char2;
+            }
+            else
+            {
+                str = char1;
+            }
+        }
+        else
+        {
+            str = char2;
+        }
+
+        return str;
+    }
+}
