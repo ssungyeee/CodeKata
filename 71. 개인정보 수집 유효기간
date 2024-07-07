@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int[] solution(string today, string[] terms, string[] privacies)
+    {
+        List<int> answer = new List<int>();
+
+        string[] todaySplit = today.Split('.');
+
+        for (int i = 0; i < privacies.Length; i++)
+        {
+            string[] privaciesSplit = privacies[i].Split('.', ' ');
+
+            for (int j = 0; j < terms.Length; j++)
+            {
+                string[] termsSplit = terms[j].Split(' ');
+
+                if (privaciesSplit[3] == termsSplit[0])
+                {
+                    int priMon = int.Parse(privaciesSplit[1]);
+                    priMon += int.Parse(termsSplit[1]); // 진짜 미친 1~12가 1~100이었다 돌아버렷
+
+                    int priYY = int.Parse(privaciesSplit[0]);
+
+                    if (priMon > 12)
+                    {
+                        while (priMon > 12)
+                        {
+                            priMon -= 12;
+                            priYY++;
+                        }
+                    }
+
+                    int priDay = int.Parse(privaciesSplit[2]);
+
+                    if (priDay == 1)
+                    {
+                        priDay = 28;
+                        priMon--;
+                    }
+                    else
+                    {
+                        priDay--;
+                    }
+
+                    privaciesSplit[0] = priYY.ToString();
+                    privaciesSplit[1] = priMon.ToString("D2");
+                    privaciesSplit[2] = priDay.ToString("D2");
+
+                    break;
+                }
+            }
+            // 이제 Today와 비교
+            // privaciesSplit 가 Today 보다 작으면 answer.Add
+
+            string dateToday = "";
+            string datePri = "";
+
+            for (int k = 0; k < 3; k++)
+            {
+                dateToday += todaySplit[k];
+                datePri += privaciesSplit[k];
+            }
+
+            int result = string.Compare(dateToday, datePri);
+
+            if (result > 0)
+            {
+                answer.Add(i + 1);
+            }
+        }
+
+        return answer.ToArray();
+    }
+}
