@@ -1,0 +1,163 @@
+using System;
+
+public class Solution
+{
+    public int[] solution(string[] park, string[] routes)
+    {
+        // { S O O }
+        // { O O O }
+        // { O O O }
+        // W, E 중 거리가 1차 배열의 길이를 넘어갈 경우 false
+        // S, N 중 거리가 2차 배열의 개수를 넘어갈 경우 false
+        // 이동 거리 중 X가 있을 경우 false
+        // 나머지는 true
+
+        int mapX = park[0].Length;
+        int mapY = park.Length;
+
+        string[,] map = new string[mapY, mapX];
+
+        for (int i = 0; i < mapY; i++)
+        {
+            char[] chars = park[i].ToCharArray();
+
+            for (int j = 0; j < mapX; j++)
+            {
+                // park[n] 을 charArray로 변환 후 여기서 map 2중 배열에 할당
+                map[i, j] = chars[j].ToString();
+            }
+        }
+
+        int[] start = new int[2];
+
+        for (int i = 0; i < mapY; i++)
+        {
+            for (int j = 0; j < mapX; j++)
+            {
+                if (string.Equals(map[i, j], "S"))
+                {
+                    Console.WriteLine($"{i}, {j}");
+                    start[0] = i; // mapY
+                    start[1] = j; // mapX
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < routes.Length; i++)
+        {
+            char[] charArray = routes[i].ToCharArray();
+            int distance = (int)char.GetNumericValue(charArray[2]);
+
+            if (charArray[0] == 'E' ||  charArray[0] == 'W')
+            {
+                if (charArray[0] == 'E')
+                {
+                    bool is_E_Move = true;
+                    int num = start[1];
+
+                    for (int j = 0; j < distance; j++)
+                    {
+                        num++;
+
+                        if (num > mapX - 1 || map[start[0], num] == "X")
+                        {
+                            is_E_Move = false;
+                            break;
+                        }
+                    }
+
+                    if (is_E_Move)
+                    {
+                        start[1] += distance;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    bool is_W_Move = true;
+                    int num = start[1];
+
+                    for (int j = 0; j < distance; j++)
+                    {
+                        num--;
+
+                        if (num < 0 || map[start[0], num] == "X")
+                        {
+                            is_W_Move = false;
+                            break;
+                        }
+                    }
+
+                    if (is_W_Move)
+                    {
+                        start[1] -= distance;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                if (charArray[0] == 'S')
+                {
+                    bool is_S_Move = true;
+                    int num = start[0];
+
+                    for (int j = 0; j < distance; j++)
+                    {
+                        num++;
+
+                        if (num > mapY - 1 || map[num, start[1]] == "X")
+                        {
+                            is_S_Move = false;
+                            break;
+                        }
+                    }
+
+                    if (is_S_Move)
+                    {
+                        start[0] += distance;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    bool is_N_Move = true;
+                    int num = start[0];
+
+                    for (int j = 0; j < distance; j++)
+                    {
+                        num--;
+
+                        if (num < 0 || map[num, start[1]] == "X")
+                        {
+                            is_N_Move = false;
+                            break;
+                        }
+                    }
+
+                    if (is_N_Move)
+                    {
+                        start[0] -= distance;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+        }
+
+        int[] answer;
+        return answer = start;
+    }
+}
