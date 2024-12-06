@@ -1,0 +1,63 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int[] solution(string[] id_list, string[] report, int k)
+    {
+        int[] answer = new int[id_list.Length];
+
+        string[] distReport = report.Distinct().ToArray();
+
+        Dictionary<string, int> reportedId = new Dictionary<string, int>();
+        Dictionary<string, List<string>> reporter = new Dictionary<string, List<string>>();
+
+        foreach (string id in id_list)
+        {
+            reportedId.Add(id, 0);
+        }
+
+        for (int i = 0; i < distReport.Length; i++)
+        {
+            string[] str = distReport[i].Split(' ');
+
+            string _reporter = str[0];
+            string _reportedId = str[1];
+
+            if (reportedId.ContainsKey(_reportedId))
+            {
+                reportedId[_reportedId]++;
+            }
+
+            if (reporter.ContainsKey(_reporter))
+            {
+                reporter[_reporter].Add(_reportedId);
+            }
+            else
+            {
+                reporter.Add(_reporter, new List<string>() { _reportedId });
+            }
+        }
+
+        foreach (var dict in reportedId)
+        {
+            if (dict.Value >= k)
+            {
+                foreach (var dict2 in reporter)
+                {
+                    for (int i = 0; i < dict2.Value.Count; i++)
+                    {
+                        if (dict2.Value[i] == dict.Key)
+                        {
+                            int index = Array.IndexOf(id_list, dict2.Key);
+                            answer[index]++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return answer;
+    }
+}
