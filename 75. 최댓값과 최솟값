@@ -1,0 +1,56 @@
+using System.Collections.Generic;
+
+public class Solution
+{
+    public string solution(string s)
+    {
+        string answer = "";
+
+        List<int> ints = new List<int>();
+
+        string[] strArray = s.Split(' ');
+
+        for (int i = 0; i < strArray.Length; i++)
+        {
+            bool max = false;
+            bool min = false;
+
+            for (int j = 0; j < strArray.Length; j++)
+            {
+                if (j == i) continue;
+
+                int stri = int.Parse(strArray[i]);
+                int strj = int.Parse(strArray[j]);
+
+                if (stri > strj)
+                {
+                    // 최댓값은 이 조건문만 통과한다.
+                    max = true;
+                }
+                else if (stri < strj)
+                {
+                    // 최솟값은 이 조건문만 통과한다.
+                    min = true;
+                }
+            }
+
+            if (max && min)
+            {
+
+            }
+            else
+            {
+                int num = int.Parse(strArray[i]);
+                ints.Add(num);
+            }
+        }
+
+        ints.Sort();
+
+        answer += ints[0].ToString();
+        answer += " ";
+        answer += ints[1].ToString();
+
+        return answer;
+    }
+}
