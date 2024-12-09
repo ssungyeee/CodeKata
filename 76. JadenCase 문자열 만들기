@@ -1,0 +1,71 @@
+public class Solution
+{
+    public string solution(string s)
+    {
+        string answer = "";
+
+        // a 97, z 122, A 65, Z 90
+
+        string[] strArray = s.Split(' ');
+
+        for (int i = 0; i < strArray.Length; i++)
+        {
+            if (strArray[i] == "") continue;
+
+            char[] chars = strArray[i].ToCharArray();
+
+            if (chars[0] < 58)
+            {
+                // chars 데이터를 전부 소문자로 변경한다.
+                for (int j = 1; j < chars.Length; j++)
+                {
+                    if (chars[j] > 64 && chars[j] < 91)
+                    {
+                        chars[j] += ' ';
+                    }
+                }
+            }
+            else if (chars[0] > 64 && chars[0] < 91)
+            {
+                // chars[0] 데이터가 대문자이므로 나머지를 소문자로 변경한다.
+                for (int j = 1; j < chars.Length; j++)
+                {
+                    if (chars[j] > 64 && chars[j] < 91)
+                    {
+                        chars[j] += ' ';
+                    }
+                }
+            }
+            else
+            {
+                // chars[0] 데이터가 소문자이므로 대문자로 바꾸고 나머지를 소문자로 변경한다.
+                chars[0] -= ' ';
+                for (int j = 1; j < chars.Length; j++)
+                {
+                    if (chars[j] > 64 && chars[j] < 91)
+                    {
+                        chars[j] += ' ';
+                    }
+                }
+            }
+
+            strArray[i] = "";
+
+            foreach (char c in chars)
+            {
+                strArray[i] += c;
+            }
+        }
+
+        for (int i = 0; i < strArray.Length; i++)
+        {
+            answer += strArray[i];
+            if (i < strArray.Length - 1)
+            {
+                answer += " ";
+            }
+        }
+
+        return answer;
+    }
+}
