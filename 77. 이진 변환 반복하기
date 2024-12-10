@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int[] solution(string s)
+    {
+        int[] answer = new int[2] { 0, 0 };
+
+        char[] chars = s.ToCharArray();
+        List<int> intsList = new List<int>();
+
+        foreach (char c in chars)
+        {
+            string str = c.ToString();
+            intsList.Add(int.Parse(str));
+        }
+
+        while (true)
+        {
+            int zeroCount = intsList.RemoveAll(x => x == 0);
+            answer[1] += zeroCount;
+
+            string binaryStr = Convert.ToString(intsList.Count, 2);
+            char[] chars2 = binaryStr.ToCharArray();
+
+            intsList.Clear();
+
+            foreach (char c in chars2)
+            {
+                string str = c.ToString();
+                intsList.Add(int.Parse(str));
+            }
+
+            answer[0]++;
+
+            if (intsList.Count == 1)
+            {
+                break;
+            }
+        }
+
+        return answer;
+    }
+}
