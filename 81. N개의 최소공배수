@@ -1,0 +1,47 @@
+ public class Solution
+    {
+        public int solution(int[] arr)
+        {
+            int answer = 0;
+            bool isCheck = false;
+
+            int[] arr2 = new int[arr.Length];
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr2[i] = arr[i];
+            }
+
+            while (true)
+            {
+                for (int i = 0; i < arr2.Length - 1; i++)
+                {
+                    while (arr2[i] < arr2[arr2.Length - 1])
+                    {
+                        arr2[i] += arr[i];
+                    }
+                }
+
+                for (int i = 0; i < arr2.Length - 1; i++)
+                {
+                    if (arr2[i] == arr2[arr2.Length - 1])
+                    {
+                        isCheck = true;
+                    }
+                    else
+                    {
+                        isCheck = false;
+                        arr2[arr2.Length - 1] += arr[arr.Length - 1];
+                        break;
+                    }
+                }
+
+                if (isCheck)
+                {
+                    return arr2[arr2.Length - 1];
+                }
+            }
+
+            return answer;
+        }
+    }
