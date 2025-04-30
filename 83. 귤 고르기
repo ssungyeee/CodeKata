@@ -1,0 +1,37 @@
+public class Solution
+{
+    public int solution(int k, int[] tangerine)
+    {
+        int answer = 0;
+
+        Dictionary<int, int> tangerineDict = new Dictionary<int, int>();
+
+        foreach (int num in tangerine)
+        {
+            if (tangerineDict.ContainsKey(num))
+            {
+                tangerineDict[num]++;
+            }
+            else
+            {
+                tangerineDict.Add(num, 1);
+            }
+        }
+
+        var dict = tangerineDict.OrderByDescending(pair => pair.Value);
+
+        int count = 0;
+
+        foreach (var num in dict)
+        {
+            count += num.Value;
+            answer++;
+            if (count >= k)
+            {
+                break;
+            }
+        }
+
+        return answer;
+    }
+}
