@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(string s)
+    {
+        int answer = 0;
+
+        if (s.Length % 2 != 0)
+        {
+            return 0;
+        }
+
+        for (int i = 0; i < s.Length - 1; i++)
+        {
+            if (IsValid(s))
+            {
+                answer++;
+            }
+            s = s.Substring(1) + s[0];
+        }
+
+        return answer;
+    }
+
+    public bool IsValid(string s)
+    {
+        Stack<char> stack = new Stack<char>();
+        Dictionary<char, char> dict = new Dictionary<char, char> { { ')', '(' }, { ']', '[' }, { '}', '{' } };
+
+        foreach (char c in s)
+        {
+            if (dict.ContainsValue(c))
+            {
+                stack.Push(c);
+            }
+            else if (dict.ContainsKey(c))
+            {
+                if (stack.Count == 0 || stack.Pop() != dict[c])
+                {
+                    return false;
+                }
+            }
+        }
+
+        return stack.Count == 0;
+    }
+}
