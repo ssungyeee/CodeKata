@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(int[] citations)
+    {
+        List<int> lists = new List<int>();
+
+        Array.Sort(citations);
+
+        for (int h = 0; h < citations.Length + 1; h++)
+        {
+            int count = 0;
+
+            for (int i = 0; i < citations.Length; i++)
+            {
+                if (citations[i] >= h)
+                {
+                    count++;
+                }
+
+            }
+
+            if (count >= h)
+            {
+                lists.Add(h);
+            }
+        }
+
+
+        return lists[lists.Count - 1];
+    }
+}
