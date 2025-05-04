@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public long[] solution(int n, long left, long right)
+    {
+        List<long> list = new List<long>();
+
+        long i = left / n;
+        long j = left % n;
+
+        for (int k = 0; k <= (right - left); k++)
+        {
+            long sum = Math.Max(i, j) + 1;
+            list.Add(sum);
+
+            j++;
+            if (j >= n)
+            {
+                j = 0;
+                i++;
+            }
+        }
+
+        // [0, 2]
+
+        return list.ToArray();
+    }
+}
