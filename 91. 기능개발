@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int[] solution(int[] progresses, int[] speeds)
+    {
+        List<int> answer = new List<int>();
+
+        int[] days = new int[progresses.Length];
+
+        for (int i = 0; i < progresses.Length; i++)
+        {
+            int remain = 100 - progresses[i];
+
+            days[i] = (int)Math.Ceiling((double)remain / speeds[i]);
+        }
+
+        int current = days[0];
+        int count = 1;
+
+        for (int i = 1; i < days.Length; i++)
+        {
+            if (current >= days[i])
+            {
+                count++;
+            }
+            else
+            {
+                current = days[i];
+                answer.Add(count);
+                count = 1;
+            }
+        }
+
+        answer.Add(count);
+
+        return answer.ToArray();
+    }
+}
