@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+{
+    public int solution(int[] priorities, int location)
+    {
+        Queue<(int priority, int index)> que = new Queue<(int priority, int index)>();
+
+        for (int i = 0; i < priorities.Length; i++)
+        {
+            que.Enqueue((priorities[i], i));
+        }
+
+        int count = 0;
+
+        while (que.Count > 0)
+        {
+            var current = que.Dequeue();
+
+            if (que.Any(x => x.priority > current.priority))
+            {
+                que.Enqueue(current);
+            }
+            else
+            {
+                count++;
+                if (current.index == location)
+                {
+                    return count;
+                }
+            }
+        }
+
+        return count;
+    }
+}
