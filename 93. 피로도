@@ -1,0 +1,40 @@
+using System;
+
+public class Solution
+{
+    int maxCount = 0;
+
+    public int solution(int k, int[,] dungeons)
+    {
+        int dungeonCount = dungeons.GetLength(0);
+        int[][] jaggedDungeons = new int[dungeonCount][];
+
+        for (int i = 0; i < dungeonCount; i++)
+        {
+            jaggedDungeons[i] = new int[] { dungeons[i, 0], dungeons[i, 1] };
+        }
+
+        bool[] visitied = new bool[dungeonCount];
+
+        DFS(k, jaggedDungeons, visitied, 0);
+
+        return maxCount;
+    }
+
+    public void DFS(int currentFatigue, int[][] jaggedDungeons, bool[] visited, int count)
+    {
+        for (int i = 0; i < jaggedDungeons.Length; i++)
+        {
+            if (!visited[i] && currentFatigue >= jaggedDungeons[i][0])
+            {
+                visited[i] = true;
+
+                DFS(currentFatigue - jaggedDungeons[i][1], jaggedDungeons, visited, count + 1);
+
+                visited[i] = false;
+            }
+        }
+
+        maxCount = Math.Max(maxCount, count);
+    }
+}
