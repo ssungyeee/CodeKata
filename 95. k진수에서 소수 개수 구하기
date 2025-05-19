@@ -1,0 +1,65 @@
+using System;
+
+public class Solution
+{
+    public int solution(int n, int k)
+    {
+        int answer = 0;
+
+        string converted = ToBaseK(n, k);
+        string[] parts = converted.Split('0');
+
+        foreach (string part in parts)
+        {
+            if (part == "1" || part == "")
+            {
+                continue;
+            }
+
+            long num = long.Parse(part);
+
+            if (isPrime(num))
+            {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+
+    bool isPrime(long num)
+    {
+        if (num < 2)
+        {
+            return false;
+        }
+
+        for (long i = 2; i * i <= num; i++)
+        {
+            if (num % i == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    string ToBaseK(long n, int k)
+    {
+        if (n == 0)
+        {
+            return "0";
+        }
+
+        string result = "";
+
+        while (n > 0)
+        {
+            result = (n % k).ToString() + result;
+            n /= k;
+        }
+
+        return result;
+    }
+}
