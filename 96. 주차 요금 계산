@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution
+{
+    public int[] solution(int[] fees, string[] records)
+    {
+        Dictionary<string, int> inTime = new Dictionary<string, int>();
+        Dictionary<string, int> totalTime = new Dictionary<string, int>();
+
+        foreach (string record in records)
+        {
+            string[] split = record.Split(' ');
+            int time = ConvertToMinutes(split[0]); // ConvertToMinutes() 작성 필요
+            string car = split[1];
+            string type = split[2];
+
+            if (type == "IN")
+            {
+                inTime[car] = time;
+            }
+            else
+            {
+                // 출차 시간 - 입차 시간 즉 time - inTime.value
+                int durationTime = time - inTime[car];
+
+                if (totalTime.ContainsKey(car))
+                {
+                    totalTime[car] += durationTime;
+                }
+                else
+                {
+                    totalTime[car] = durationTime;
+                }
+                
+                inTime.Remove(car); //출차시 기록 삭제
+            }
+        }
+        
+        foreach (var entry in inTime) // 출차하지 않은 차들
+        {
+            string car = entry.Key;
+            int entryTime = entry.Value;
+            int durationTime = ConvertToMinutes("23:59") - entryTime;
+
+            if (totalTime.ContainsKey(car))
+            {
+                totalTime[car] += durationTime;
+            }
+            else
+            {
+                totalTime[car] = durationTime;
+            }
+        }
+
+        List<int> result = new List<int>();
+
+        foreach (var car in totalTime.Keys.OrderBy(k => k))
+        {
+            int time = totalTime[car];
+            int fee = 0;
+
+            if (time <= fees[0])
+            {
+                fee = fees[1];
+            }
+            else
+            {
+                double extra = (double)(time - fees[0]) / fees[2];
+                fee = fees[1] + (int)Math.Ceiling(extra) * fees[3];
+            }
+
+            result.Add(fee);
+        }
+
+        return result.ToArray();
+    }
+
+    public int ConvertToMinutes(string str)
+    {
+        string[] split = str.Split(':');
+        int hour = int.Parse(split[0]);
+        int minute = int.Parse(split[1]);
+        return (hour * 60) + minute;
+    }
+}
