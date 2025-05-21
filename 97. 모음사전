@@ -1,0 +1,38 @@
+using System;
+
+public class Solution
+{
+    string[] vowels = new string[] { "A", "E", "I", "O", "U" };
+    int count = 0;
+    int answer = 0;
+
+    public int solution(string word)
+    {
+        DFS("", word);
+        return answer;
+    }
+
+    public void DFS(string current, string word)
+    {
+        if (current == word)
+        {
+            answer = count;
+            return;
+        }
+
+        if (current.Length == 5)
+        {
+            return;
+        }
+
+        foreach (string v in vowels)
+        {
+            count++;
+            DFS(current + v, word);
+            if (answer != 0)
+            {
+                return;
+            }
+        }
+    }
+}
