@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution
+{
+    public int solution(int[] topping)
+    {
+        int answer = 0;
+
+        HashSet<int> leftSet = new HashSet<int>();
+        Dictionary<int, int> rightDict = new Dictionary<int, int>();
+
+        foreach (int i in topping)
+        {
+            if (rightDict.ContainsKey(i))
+            {
+                rightDict[i]++;
+            }
+            else
+            {
+                rightDict.Add(i, 1);
+            }
+        }
+
+        for (int i = 0; i < topping.Length; i++)
+        {
+            int topp = topping[i];
+            leftSet.Add(topp);
+            rightDict[topp]--;
+
+            if (rightDict[topp] == 0)
+            {
+                rightDict.Remove(topp);
+            }
+
+            if (leftSet.Count == rightDict.Count)
+            {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
